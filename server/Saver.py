@@ -6,6 +6,6 @@ conn = redis.Redis('localhost', port=6379, db=0)
 
 def SaveUser(user):
     messageJson = (js.MessageToJson(user))
-    conn.set("Users", messageJson)
+    conn.set(user.user_name, messageJson)
     response = user.user_name + " kayıt edildi."
     return response
