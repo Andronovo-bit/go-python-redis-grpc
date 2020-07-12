@@ -9,10 +9,14 @@ import (
 	"os"
 	"strconv"
 	"time"
+	"strings"
 
 	"github.com/Andronovo-bit/go-python-redis-grpc/pkg/proto/user"
+
 	"google.golang.org/grpc"
 )
+
+var jsonByteVal []uint8
 
 type Users struct {
 	Users []User
@@ -30,9 +34,13 @@ type User struct {
 	Country   string `json:"country"`
 }
 
-func jsonToProtobuff() Users {
+func jsonToProtobuff(jsonName string) Users {
+	
+	var users2 Users
 
-	jsonFile, err := os.Open("1ch.json")
+	json.Unmarshal(jsonByteVal, &users2)
+
+	jsonFile, err := os.Open("./users_json/" + jsonName)
 
 	if err != nil {
 		fmt.Println(err)
@@ -72,34 +80,40 @@ func main() {
 
 	client := user.NewSaverClient(conn)
 
-	var users = jsonToProtobuff()
+	files,_ := ioutil.ReadDir("./users_json")
 
-	for index, element := range users.Users {
+	for  i,item := range files{
+		if strings.Contains(item.Name(), "json"){
+			var users = jsonToProtobuff(item.Name())
 
+			for index, element := range users.Users {
 
-	request := &user.User{
-		Id:        element.ID,
-		FirstName: element.FirstName,
-		LastName:  element.LastName,
-		Email:     element.Email,
-		Gender:    element.Gender,
-		IpAddress: element.Ip,
-		UserName:  element.Username,
-		Agent:     element.Agent,
-		Country:   element.Country,
+				request := &user.User{
+					Id:        element.ID,
+					FirstName: element.FirstName,
+					LastName:  element.LastName,
+					Email:     element.Email,
+					Gender:    element.Gender,
+					IpAddress: element.Ip,
+					UserName:  element.Username,
+					Agent:     element.Agent,
+					Country:   element.Country,
+				}
+
+				ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+				defer cancel()
+
+				response, err := client.SaveUser(ctx, request)
+				if err != nil {
+					log.Fatalln(err)
+				}
+
+				log.Println("First-index:", i)
+				log.Println("index:", index)
+				log.Println("Response:", response)
+
+			}
+		}
 	}
-
-	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
-	defer cancel()
-
-	response, err := client.SaveUser(ctx, request)
-	if err != nil {
-		log.Fatalln(err)
-	}
-	
-	log.Println("index:", index)
-	log.Println("Response:", response)
-
-}
 	defer conn.Close()
 }
