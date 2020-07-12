@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package user
+
 service Saver {
     rpc SaveUser (User) returns (UserReply) {}
   }
