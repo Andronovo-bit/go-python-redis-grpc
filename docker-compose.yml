@@ -1,0 +1,18 @@
+version: '3'
+services:
+  database:
+    image: 'redis:latest'
+    network_mode: bridge
+    ports:
+      - '6379:6379'
+      
+  grpc-server:
+    container_name: grpc-server
+    build:
+      dockerfile: Dockerfile
+      context: ./server
+    network_mode: bridge
+    ports:
+      - '50051:50051'
+    depends_on:
+      - database

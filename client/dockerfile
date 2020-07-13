@@ -1,0 +1,10 @@
+FROM golang:1.14.0
+
+WORKDIR /usr/src/app/client 
+
+COPY  ./  /usr/src/app/client
+
+RUN go build -o ./client/main ./client
+
+
+

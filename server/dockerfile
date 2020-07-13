@@ -1,0 +1,15 @@
+FROM python:3.7
+
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir nibabel pydicom matplotlib pillow && \
+    pip install --no-cache-dir grpcio \
+	pip install --no-cache-dir protobuf \
+	pip install --no-cache-dir redis
+
+WORKDIR /usr/src/app/server
+
+COPY  ./  /usr/src/app/server
+
+EXPOSE 50051
+
+CMD ["python", "server.py"]
