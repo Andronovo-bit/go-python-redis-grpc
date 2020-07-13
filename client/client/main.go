@@ -66,7 +66,7 @@ func jsonToProtobuff(jsonName string) Users {
 func clientRun() *grpc.ClientConn {
 	log.Println("Client running ...")
 
-	conn, err := grpc.Dial(":50051", grpc.WithInsecure(), grpc.WithBlock())
+	conn, err := grpc.Dial("172.17.0.1:50051", grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
 		log.Fatalln(err)
 	}

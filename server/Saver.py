@@ -1,7 +1,7 @@
 import redis
 import google.protobuf.json_format as js
 
-conn = redis.Redis('localhost', port=6379, db=0)
+conn = redis.Redis('172.17.0.1', port=6379, db=0)
 
 
 def SaveUser(user):
