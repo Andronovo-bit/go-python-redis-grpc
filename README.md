@@ -2,7 +2,7 @@
 
 ## Giriş
 
-Bu projede docker sanallaştırması ve gRPC protokolü kullanılarak json içerisinde bulunan veriler go dili ile yazılmış client kod bloğu ile okunarak protobuf'a çevirlierek pyhton dili ile yazılmış server'e gönderilir. Daha sonra server ise gelen verileri alarak redis'e kayıt eder.
+Bu projede docker sanallaştırması ve gRPC protokolü kullanılarak json içerisinde bulunan veriler go dili ile yazılmış client kod bloğu ile okunarak protobuf'a çevirilerek pyhton dili ile yazılmış server'e gönderilir. Daha sonra server ise gelen verileri alarak redis'e kayıt eder.
 
 Projenin çalışabilmesi için ilk öncelikle bilgisayarınızda docker kurulu olmalıdır.
 
@@ -16,7 +16,7 @@ Docker kurulumu yapıldıktan sonra projeyi bilgisayarınıza çekebilirsiniz.
 
 İlk olarak proje ana dizinine girin.
 
-1-) ```docker-compose config``` komutu ile config dosyasını kontrol ediniz
+1-) ```docker-compose config``` komutu ile config dosyasını kontrol ediniz.
 
 2-) ```docker-compose up --build -d```  komutu ile server ve redis containerlerini oluşturunuz.
 
