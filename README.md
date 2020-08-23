@@ -37,7 +37,9 @@ Projeyi çalıştımak için
 
 Proje çalıştıktan sonra terminal ekranında json'daki verilerin kayıt edildiğini göreceksiniz. Redis'e giderek kayıt edilen verileri görebilirsiniz. Key olarak ip adresi kullanılmıştır. 
 
----------------------------ENGLISH------------------------------------
+
+ENGLISH
+------------------------------------
 
 ## Introduction
 
